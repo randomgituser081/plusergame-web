@@ -20,8 +20,9 @@ const montserrat = localFont({
 const SITE_URL = "https://plusergame-web.vercel.app";
 const SITE_NAME = "Pluser Game";
 const SITE_TITLE = "Pluser Game – Play Fun Games & Win Real Rewards";
+/** Keep ≤125 chars so WhatsApp / mobile previews do not truncate mid-sentence. */
 const SITE_DESCRIPTION =
-  "Spin, roll, flip and play your favourite virtual games. Deposit securely, withdraw winnings, and climb the leaderboard on Pluser Game.";
+  "Play spin, dice, coin flip & more. Deposit, withdraw, and win real rewards on Pluser Game.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -56,10 +57,10 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [
       {
-        url: "/images/icon.png",
-        width: 1024,
-        height: 1024,
-        alt: "Pluser Game logo",
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Pluser Game – Play. Win. Cash Out.",
         type: "image/png",
       },
     ],
@@ -68,11 +69,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/images/icon.png"],
+    images: ["/twitter-image"],
   },
   robots: { index: true, follow: true },
   other: {
-    "theme-color": "#1a1a1a",
+    "theme-color": "#0F1115",
   },
 };
 
