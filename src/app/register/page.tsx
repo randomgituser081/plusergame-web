@@ -65,12 +65,15 @@ export default function RegisterPage() {
     const phone = formatPhone(form.phoneNumber);
     try {
       setLoading(true);
+      // Match Expo / Pluser API: snake_case + confirm_password + country_of_residence
       await axiosClient.post("/auth/register", {
-        full_name: form.fullName,
+        country_of_residence: "nigeria",
         phone_number: phone,
         email: form.email,
+        full_name: form.fullName,
         password: form.password,
-        referral_code: form.referralCode || undefined,
+        confirm_password: form.confirmPassword,
+        referral_code: form.referralCode || "",
       });
       setEmail(form.email);
       sessionStorage.setItem("registerPhone", phone);

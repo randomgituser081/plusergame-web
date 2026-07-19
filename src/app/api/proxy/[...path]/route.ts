@@ -7,9 +7,9 @@ const BASE_URL =
 
 async function forward(req: NextRequest, segments: string[]) {
   const search = req.nextUrl.search ?? "";
-  const joined = segments.filter(Boolean).join("/");
-  // Django-style API expects trailing slashes
-  const path = joined.endsWith("/") ? joined : `${joined}/`;
+  // Do not force a trailing slash — buzzycash redirects `/path/` → `/path` (307),
+  // and some runtimes drop POST bodies when following that redirect.
+  const path = segments.filter(Boolean).join("/").replace(/\/+$/, "");
   const target = `${BASE_URL.replace(/\/$/, "")}/${path}${search}`;
 
   const headers: Record<string, string> = {
