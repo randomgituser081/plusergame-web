@@ -65,16 +65,19 @@ export default function RegisterPage() {
     const phone = formatPhone(form.phoneNumber);
     try {
       setLoading(true);
-      // Match Expo / Pluser API: snake_case + confirm_password + country_of_residence
-      await axiosClient.post("/auth/register", {
-        country_of_residence: "nigeria",
+      // Match Expo / Swagger dto.SignUpRequest (snake_case).
+      const payload: Record<string, string> = {
+        country_of_residence: "Nigeria",
         phone_number: phone,
-        email: form.email,
-        full_name: form.fullName,
+        email: form.email.trim(),
+        full_name: form.fullName.trim(),
         password: form.password,
         confirm_password: form.confirmPassword,
-        referral_code: form.referralCode || "",
-      });
+      };
+      if (form.referralCode.trim()) {
+        payload.referral_code = form.referralCode.trim();
+      }
+      await axiosClient.post("/auth/register", payload);
       setEmail(form.email);
       sessionStorage.setItem("registerPhone", phone);
       toast.success("Account created. Enter OTP to verify.");
